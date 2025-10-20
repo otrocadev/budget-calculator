@@ -1,0 +1,28 @@
+.service-card {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  align-items: center;
+  max-width: 600px;
+  border-radius: 1rem;
+  padding: 2rem 4rem;
+  gap: 4rem;
+  width: 100%;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: var(--theme-1-dark);
+    border: 1px solid var(--details-dark);
+  }
+}
+
+.service-title {
+  font-size: var(--font-size-l);
+}
+
+.service-price {
+  font-size: var(--font-size-l);
+  font-weight: bold;
+
+  @media (prefers-color-scheme: dark) {
+    color: var(--accent-font-dark);
+  }
+}

@@ -1,1 +1,35 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --primary-font-dark: #fff;
+  --accent-font-dark: #4cd625;
+  --details-dark: #2e4a66;
+  --background-dark: #001633;
+  --theme-1-dark: #000e22;
+
+  --font-size-m: 1rem;
+  --font-size-l: 1.5rem;
+}
+
+@font-face {
+  font-family: "Raleway";
+  src: url("/fonts/Raleway-VariableFont_wght.ttf");
+}
+
+body {
+  margin: 0;
+  font-family: "Raleway";
+
+  @media (prefers-color-scheme: dark) {
+    background-color: var(--background-dark);
+    color: var(--primary-font-dark);
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      color: var(--accent-font-dark);
+      margin: 0;
+    }
+  }
+}

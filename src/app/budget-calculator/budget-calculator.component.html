@@ -1,0 +1,11 @@
+<section id="services-calculator">
+  @for(service of servicesData; track service.title) {
+  <app-service-card
+    [title]="service.title"
+    [description]="service.description"
+    [price]="service.price"
+    [selected]="service.selected"
+    (selectedChange)="manageService(service.title)"
+  ></app-service-card>
+  }
+</section>

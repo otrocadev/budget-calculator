@@ -1,0 +1,15 @@
+<article class="service-card">
+  <section>
+    <h3 class="service-title">{{ title }}</h3>
+    <span>{{ description }}</span>
+  </section>
+  <section class="service-price">{{ price }}€</section>
+  <section>
+    <input
+      [(ngModel)]="selected"
+      type="checkbox"
+      (change)="onCheckboxChange()"
+    />
+    <label>Afegir</label>
+  </section>
+</article>
