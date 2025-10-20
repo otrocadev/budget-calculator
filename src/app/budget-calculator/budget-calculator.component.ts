@@ -25,7 +25,7 @@ export class BudgetCalculatorComponent {
     this.selectedServices.includes(title)
       ? this.removeService(title)
       : this.addService(title);
-    console.log(this.selectedServices);
+    this.calculateTotal();
   }
 
   removeService(title: string) {
@@ -36,5 +36,12 @@ export class BudgetCalculatorComponent {
     this.selectedServices.push(title);
   }
 
-  calculateTotal() {}
+  calculateTotal() {
+    this.total = 0;
+    this.selectedServices.forEach((service) => {
+      this.total =
+        this.total +
+        (this.servicesData.find((s) => s.title === service)?.price || 0);
+    });
+  }
 }

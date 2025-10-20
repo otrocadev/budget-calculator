@@ -6,3 +6,8 @@
   width: 100%;
   gap: 2rem;
 }
+
+#total-price {
+  font-size: var(--font-size-l);
+  color: var(--accent-font-dark);
+}
