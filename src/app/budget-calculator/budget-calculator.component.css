@@ -1,6 +1,8 @@
 #services-calculator {
   display: flex;
   justify-content: center;
+  max-width: var(--container-max-width);
+  margin: auto;
   align-items: center;
   flex-direction: column;
   width: 100%;
@@ -8,6 +10,16 @@
 }
 
 #total-price {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 0.5rem;
   font-size: var(--font-size-l);
-  color: var(--accent-font-dark);
+  font-weight: bold;
+  color: var(--accent-font-light);
+
+  @media (prefers-color-scheme: dark) {
+    color: var(--accent-font-dark);
+  }
 }

@@ -1,0 +1,16 @@
+header {
+  margin-bottom: 2rem;
+  text-align: center;
+  font-size: var(--font-size-l);
+  padding: 2rem;
+
+  h2 {
+    font-size: var(--font-size-m);
+    margin-bottom: 2rem;
+    text-align: left;
+  }
+
+  h1 {
+    margin-top: 2rem;
+  }
+}

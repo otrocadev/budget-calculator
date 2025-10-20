@@ -1,10 +1,10 @@
-<article class="service-card">
+<article class="service-card" [ngClass]="{ selected: selected }">
   <section>
     <h3 class="service-title">{{ title }}</h3>
     <span>{{ description }}</span>
   </section>
   <section class="service-price">{{ price }}€</section>
-  <section>
+  <section class="service-checkbox">
     <input
       [(ngModel)]="selected"
       type="checkbox"

@@ -16,7 +16,6 @@ export class BudgetCalculatorComponent {
   constructor() {
     this.servicesData.forEach((service) => {
       service.selected ? this.addService(service.title) : null;
-      console.log(this.selectedServices);
     });
     this.calculateTotal();
   }
