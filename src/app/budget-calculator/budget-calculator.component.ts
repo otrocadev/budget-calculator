@@ -26,12 +26,20 @@ export class BudgetCalculatorComponent {
     price: number;
     selected: boolean;
   }) {
+    const existingIndex = this.serviceTotals.findIndex(
+      (s) => s.service === service
+    );
+
     if (selected) {
-      this.serviceTotals.push({ service, price, selected });
+      if (existingIndex !== -1) {
+        this.serviceTotals[existingIndex] = { service, price, selected };
+      } else {
+        this.serviceTotals.push({ service, price, selected });
+      }
     } else {
-      this.serviceTotals = this.serviceTotals.filter((totalServiceAmount) => {
-        return totalServiceAmount.service !== service;
-      });
+      if (existingIndex !== -1) {
+        this.serviceTotals.splice(existingIndex, 1);
+      }
     }
     this.calculateTotal();
   }

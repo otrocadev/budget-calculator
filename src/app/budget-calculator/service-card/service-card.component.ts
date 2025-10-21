@@ -20,9 +20,44 @@ export class ServiceCardComponent {
   }>();
   serviceTotal: number = 0;
 
+  secondaryServicesChange({
+    service,
+    amount,
+  }: {
+    service: string;
+    amount: number;
+  }) {
+    this.calculateTotal();
+  }
+
   onCheckboxChange() {
-    this.serviceTotal = this.service.price;
-    console.log(this.serviceTotal);
+    this.calculateTotal();
+  }
+
+  manageSecondaryServiceAmount() {
+    let featuresAmount = 0;
+    let addOnsAmount = 0;
+
+    this.service.secondaryServices?.forEach((secondaryService) => {
+      if (secondaryService.amount > 0) {
+        if (secondaryService.type === 'feature') {
+          featuresAmount += secondaryService.amount * secondaryService.price!;
+        } else {
+          addOnsAmount += secondaryService.amount;
+        }
+      }
+    });
+
+    console.log(featuresAmount * addOnsAmount);
+
+    return featuresAmount * addOnsAmount;
+  }
+
+  calculateTotal() {
+    this.serviceTotal = 0;
+    this.serviceTotal =
+      this.service.price + this.manageSecondaryServiceAmount();
+
     this.selectedChange.emit({
       service: this.service.title,
       price: this.serviceTotal,

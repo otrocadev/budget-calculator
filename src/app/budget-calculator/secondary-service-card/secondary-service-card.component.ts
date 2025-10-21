@@ -10,23 +10,29 @@ import { FormsModule } from '@angular/forms';
 })
 export class SecondaryServiceCardComponent {
   @Input() secondaryService!: SecondaryService;
-  @Output() amountChange = new EventEmitter<number>();
+  @Output() amountChangeEvent = new EventEmitter<{
+    service: string;
+    amount: number;
+  }>();
 
-  calculateAmount() {
-    this.amountChange.emit(this.secondaryService.amount);
+  amountChange() {
+    this.amountChangeEvent.emit({
+      service: this.secondaryService.title,
+      amount: this.secondaryService.amount,
+    });
   }
 
   reduceAmount() {
     if (this.secondaryService.amount > 0) {
       this.secondaryService.amount = this.secondaryService.amount - 1;
     }
-    this.calculateAmount();
+    this.amountChange();
   }
 
   increaseAmount() {
     if (this.secondaryService.amount < 20) {
       this.secondaryService.amount = this.secondaryService.amount + 1;
     }
-    this.calculateAmount();
+    this.amountChange();
   }
 }

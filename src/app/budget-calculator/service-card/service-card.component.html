@@ -18,6 +18,7 @@
     secondaryService.title) {
     <app-secondary-service-card
       [secondaryService]="secondaryService"
+      (amountChangeEvent)="secondaryServicesChange($event)"
     ></app-secondary-service-card>
     }
   </section>
