@@ -5,7 +5,8 @@
   max-width: var(--container-max-width);
   border-radius: 1rem;
   padding: 2rem 4rem;
-  gap: 4rem;
+  column-gap: 2rem;
+  row-gap: 1rem;
 
   background-color: var(--theme-1-light);
   border: 1px solid var(--details-light);
@@ -60,4 +61,12 @@ input[type="checkbox"] {
   @media (prefers-color-scheme: dark) {
     accent-color: var(--accent-font-dark);
   }
+}
+
+.secondary-services {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  grid-column: span 3;
 }

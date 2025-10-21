@@ -1,0 +1,41 @@
+span {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.secondary-service-amount {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  max-width: 2rem;
+  height: 1.2rem;
+  text-align: center;
+  border-radius: 0.2rem;
+  border: none;
+}
+
+button {
+  border-radius: 0.2rem;
+  width: 1.2rem;
+  height: 1.2rem;
+  border: none;
+  background-color: var(--accent-font-light);
+  color: var(--background-light);
+  cursor: pointer;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: var(--accent-font-dark);
+    color: var(--details-dark);
+  }
+}

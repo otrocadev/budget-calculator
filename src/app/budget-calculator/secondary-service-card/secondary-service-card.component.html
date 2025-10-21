@@ -1,0 +1,8 @@
+<span
+  ><p>Number of {{ secondaryService.title }}</p>
+  <div class="secondary-service-amount">
+    <button (click)="reduceAmount()">-</button>
+    <input type="number" [(ngModel)]="secondaryService.amount" />
+    <button (click)="increaseAmount()">+</button>
+  </div>
+</span>
