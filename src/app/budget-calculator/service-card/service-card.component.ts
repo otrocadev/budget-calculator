@@ -48,8 +48,6 @@ export class ServiceCardComponent {
       }
     });
 
-    console.log(featuresAmount * addOnsAmount);
-
     return featuresAmount * addOnsAmount;
   }
 
