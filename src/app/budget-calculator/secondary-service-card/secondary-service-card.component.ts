@@ -1,6 +1,8 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
 import type { SecondaryService } from '../../../data/servicesData';
 import { FormsModule } from '@angular/forms';
+import { ModalInfoComponent } from '../../modal-info/modal-info.component';
+import { Dialog } from '@angular/cdk/dialog';
 
 @Component({
   selector: 'app-secondary-service-card',
@@ -15,10 +17,22 @@ export class SecondaryServiceCardComponent {
     amount: number;
   }>();
 
+  dialog = inject(Dialog);
+
   amountChange() {
     this.amountChangeEvent.emit({
       service: this.secondaryService.title,
       amount: this.secondaryService.amount,
+    });
+  }
+
+  openDialog() {
+    this.dialog.open(ModalInfoComponent, {
+      data: {
+        title: this.secondaryService.title,
+        description: this.secondaryService.description,
+        price: this.secondaryService.price,
+      },
     });
   }
 

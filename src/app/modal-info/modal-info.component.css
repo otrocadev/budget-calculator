@@ -1,0 +1,25 @@
+.modal-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  background-color: var(--background-light);
+  padding: 4rem;
+  border-radius: 0.5rem;
+  max-width: 400px;
+  margin: auto;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: var(--background-dark);
+  }
+}
+
+h2 {
+  margin: 0.4rem;
+}
+
+p {
+  margin: 0;
+}
