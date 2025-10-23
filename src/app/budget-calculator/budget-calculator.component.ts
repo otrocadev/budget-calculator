@@ -10,31 +10,44 @@ import { servicesData } from '../../data/servicesData';
 })
 export class BudgetCalculatorComponent {
   servicesData = servicesData;
-  selectedServices: string[] = [];
+  serviceTotals: { service: string; price: number; selected: boolean }[] = [];
   total: number = 0;
 
   constructor() {
-    this.servicesData.forEach((service) => {
-      service.selected ? this.addService(service.title) : null;
-      console.log(this.selectedServices);
-    });
     this.calculateTotal();
   }
 
-  manageService(title: string) {
-    this.selectedServices.includes(title)
-      ? this.removeService(title)
-      : this.addService(title);
-    console.log(this.selectedServices);
+  manageServiceTotals({
+    service,
+    price,
+    selected,
+  }: {
+    service: string;
+    price: number;
+    selected: boolean;
+  }) {
+    const existingIndex = this.serviceTotals.findIndex(
+      (s) => s.service === service
+    );
+
+    if (selected) {
+      if (existingIndex !== -1) {
+        this.serviceTotals[existingIndex] = { service, price, selected };
+      } else {
+        this.serviceTotals.push({ service, price, selected });
+      }
+    } else {
+      if (existingIndex !== -1) {
+        this.serviceTotals.splice(existingIndex, 1);
+      }
+    }
+    this.calculateTotal();
   }
 
-  removeService(title: string) {
-    this.selectedServices.splice(this.selectedServices.indexOf(title), 1);
+  calculateTotal() {
+    this.total = 0;
+    this.serviceTotals.forEach((totalServiceAmount) => {
+      this.total = this.total + totalServiceAmount.price;
+    });
   }
-
-  addService(title: string) {
-    this.selectedServices.push(title);
-  }
-
-  calculateTotal() {}
 }

@@ -1,0 +1,59 @@
+span {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.secondary-service-amount {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  margin: 0 0.5rem;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  max-width: 2rem;
+  height: 1.2rem;
+  text-align: center;
+  border-radius: 0.2rem;
+  border: none;
+}
+
+.amount-button {
+  border-radius: 0.2rem;
+  width: 1.2rem;
+  height: 1.2rem;
+  border: none;
+  background-color: var(--accent-font-light);
+  color: var(--background-light);
+  cursor: pointer;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: var(--accent-font-dark);
+    color: var(--details-dark);
+  }
+}
+
+.info-button {
+  border-radius: 50%;
+  width: 1rem;
+  height: 1rem;
+  border: none;
+  text-align: center;
+  font-size: 0.6rem;
+  background-color: var(--accent-font-light);
+  color: var(--background-light);
+  cursor: pointer;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: var(--accent-font-dark);
+    color: var(--details-dark);
+  }
+}
