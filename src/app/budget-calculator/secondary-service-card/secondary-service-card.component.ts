@@ -17,15 +17,34 @@ export class SecondaryServiceCardComponent {
     amount: number;
   }>();
 
-  dialog = inject(Dialog);
+  amountCounter: number = 0;
 
-  amountChange() {
+  ngOnInit() {
+    this.amountCounter = this.secondaryService.amount;
+  }
+
+  emitAmountChange() {
     this.amountChangeEvent.emit({
       service: this.secondaryService.title,
-      amount: this.secondaryService.amount,
+      amount: this.amountCounter,
     });
   }
 
+  reduceAmount() {
+    if (this.amountCounter > 0) {
+      this.amountCounter--;
+      this.emitAmountChange();
+    }
+  }
+
+  increaseAmount() {
+    if (this.amountCounter < 20) {
+      this.amountCounter++;
+      this.emitAmountChange();
+    }
+  }
+
+  dialog = inject(Dialog);
   openDialog() {
     this.dialog.open(ModalInfoComponent, {
       data: {
@@ -34,19 +53,5 @@ export class SecondaryServiceCardComponent {
         price: this.secondaryService.price,
       },
     });
-  }
-
-  reduceAmount() {
-    if (this.secondaryService.amount > 0) {
-      this.secondaryService.amount = this.secondaryService.amount - 1;
-    }
-    this.amountChange();
-  }
-
-  increaseAmount() {
-    if (this.secondaryService.amount < 20) {
-      this.secondaryService.amount = this.secondaryService.amount + 1;
-    }
-    this.amountChange();
   }
 }
