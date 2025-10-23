@@ -27,6 +27,12 @@ export class ServiceCardComponent {
     service: string;
     amount: number;
   }) {
+    const secondaryService = this.service.secondaryServices?.find(
+      (s) => s.title === service
+    );
+    if (secondaryService) {
+      secondaryService.amount = amount;
+    }
     this.calculateTotal();
   }
 
