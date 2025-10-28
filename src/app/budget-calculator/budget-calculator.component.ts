@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { ServiceCardComponent } from './service-card/service-card.component';
 import { servicesData } from '../../data/servicesData';
 
@@ -11,7 +11,7 @@ import { servicesData } from '../../data/servicesData';
 export class BudgetCalculatorComponent {
   servicesData = servicesData;
   serviceTotals: { service: string; price: number; selected: boolean }[] = [];
-  total: number = 0;
+  total = signal(0);
 
   constructor() {
     this.calculateTotal();
@@ -45,9 +45,9 @@ export class BudgetCalculatorComponent {
   }
 
   calculateTotal() {
-    this.total = 0;
+    this.total.set(0);
     this.serviceTotals.forEach((totalServiceAmount) => {
-      this.total = this.total + totalServiceAmount.price;
+      this.total.set(this.total() + totalServiceAmount.price);
     });
   }
 }
