@@ -1,4 +1,4 @@
-import { Component, signal, computed } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { ServiceCardComponent } from './service-card/service-card.component';
 import { servicesData } from '../../data/servicesData';
 
@@ -10,12 +10,13 @@ import { servicesData } from '../../data/servicesData';
 })
 export class BudgetCalculatorComponent {
   servicesData = servicesData;
-  serviceTotals = signal<
-    { service: string; price: number; selected: boolean }[]
-  >([]);
-  total = computed(() => {
-    return this.serviceTotals().reduce((sum, item) => sum + item.price, 0);
-  });
+  serviceTotals: { service: string; price: number; selected: boolean }[] = [];
+
+  total = signal(0);
+
+  constructor() {
+    this.calculateTotal();
+  }
 
   manageServiceTotals({
     service,
@@ -26,23 +27,28 @@ export class BudgetCalculatorComponent {
     price: number;
     selected: boolean;
   }) {
-    this.serviceTotals.update((totals) => {
-      const existingIndex = totals.findIndex((s) => s.service === service);
+    const existingIndex = this.serviceTotals.findIndex(
+      (s) => s.service === service
+    );
 
-      if (selected) {
-        if (existingIndex !== -1) {
-          const updated = [...totals];
-          updated[existingIndex] = { service, price, selected };
-          return updated;
-        } else {
-          return [...totals, { service, price, selected }];
-        }
+    if (selected) {
+      if (existingIndex !== -1) {
+        this.serviceTotals[existingIndex] = { service, price, selected };
       } else {
-        if (existingIndex !== -1) {
-          return totals.filter((_, index) => index !== existingIndex);
-        }
-        return totals;
+        this.serviceTotals.push({ service, price, selected });
       }
+    } else {
+      if (existingIndex !== -1) {
+        this.serviceTotals.splice(existingIndex, 1);
+      }
+    }
+    this.calculateTotal();
+  }
+
+  calculateTotal() {
+    this.total.set(0);
+    this.serviceTotals.forEach((totalServiceAmount) => {
+      this.total.update((total) => total + totalServiceAmount.price);
     });
   }
 }
