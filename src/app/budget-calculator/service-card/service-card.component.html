@@ -1,20 +1,20 @@
-<article class="service-card" [ngClass]="{ selected: service.selected }">
+<article class="service-card" [ngClass]="{ selected: service().selected }">
   <section>
-    <h3 class="service-title">{{ service.title }}</h3>
-    <span>{{ service.description }}</span>
+    <h3 class="service-title">{{ service().title }}</h3>
+    <span>{{ service().description }}</span>
   </section>
-  <section class="service-price">{{ service.price }}€</section>
+  <section class="service-price">{{ service().price }}€</section>
   <section class="service-checkbox">
     <input
-      [(ngModel)]="service.selected"
+      [(ngModel)]="service().selected"
       type="checkbox"
       (change)="onCheckboxChange()"
     />
     <label>Afegir</label>
   </section>
-  @if (service.secondaryServices && service.selected) {
+  @if (service().secondaryServices && service().selected) {
   <section class="secondary-services">
-    @for (secondaryService of service.secondaryServices; track
+    @for (secondaryService of service().secondaryServices; track
     secondaryService.title) {
     <app-secondary-service-card
       [secondaryService]="secondaryService"

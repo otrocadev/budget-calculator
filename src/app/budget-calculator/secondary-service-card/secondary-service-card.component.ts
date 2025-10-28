@@ -1,4 +1,12 @@
-import { Component, input, output, inject, computed } from '@angular/core';
+import {
+  Component,
+  input,
+  output,
+  inject,
+  computed,
+  signal,
+  effect,
+} from '@angular/core';
 import type { SecondaryService } from '../../../data/servicesData';
 import { FormsModule } from '@angular/forms';
 import { ModalInfoComponent } from '../../modal-info/modal-info.component';
@@ -14,7 +22,7 @@ export class SecondaryServiceCardComponent {
   secondaryService = input.required<SecondaryService>();
   serviceAmount = output<{ service: string; amount: number }>();
 
-  amountCounter: number = 0;
+  amountCounter = signal(0);
 
   title = computed(() => this.secondaryService().title);
   description = computed(() => this.secondaryService().description);
@@ -24,20 +32,20 @@ export class SecondaryServiceCardComponent {
   emitAmountChange() {
     this.serviceAmount.emit({
       service: this.secondaryService().title,
-      amount: this.amountCounter,
+      amount: this.amountCounter(),
     });
   }
 
   reduceAmount() {
-    if (this.amountCounter > 0) {
-      this.amountCounter--;
+    if (this.amountCounter() > 0) {
+      this.amountCounter.update((count) => count - 1);
       this.emitAmountChange();
     }
   }
 
   increaseAmount() {
-    if (this.amountCounter < 20) {
-      this.amountCounter++;
+    if (this.amountCounter() < 20) {
+      this.amountCounter.update((count) => count + 1);
       this.emitAmountChange();
     }
   }

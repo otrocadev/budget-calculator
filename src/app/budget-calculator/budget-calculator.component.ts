@@ -11,6 +11,7 @@ import { servicesData } from '../../data/servicesData';
 export class BudgetCalculatorComponent {
   servicesData = servicesData;
   serviceTotals: { service: string; price: number; selected: boolean }[] = [];
+
   total = signal(0);
 
   constructor() {
@@ -47,7 +48,7 @@ export class BudgetCalculatorComponent {
   calculateTotal() {
     this.total.set(0);
     this.serviceTotals.forEach((totalServiceAmount) => {
-      this.total.set(this.total() + totalServiceAmount.price);
+      this.total.update((total) => total + totalServiceAmount.price);
     });
   }
 }

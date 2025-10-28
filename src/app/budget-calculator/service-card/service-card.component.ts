@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, computed, input, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgClass } from '@angular/common';
 import type { Service } from '../../../data/servicesData';
@@ -12,13 +12,17 @@ import { SecondaryServiceCardComponent } from '../secondary-service-card/seconda
   styleUrl: './service-card.component.css',
 })
 export class ServiceCardComponent {
-  @Input() service!: Service;
-  @Output() selectedChange = new EventEmitter<{
+  service = input.required<Service>();
+  selectedChange = output<{
     service: string;
     price: number;
     selected: boolean;
   }>();
+
   serviceTotal: number = 0;
+  title = computed(() => this.service().title);
+  price = computed(() => this.service().price);
+  selected = computed(() => this.service().selected);
 
   secondaryServicesChange({
     service,
@@ -27,7 +31,7 @@ export class ServiceCardComponent {
     service: string;
     amount: number;
   }) {
-    const secondaryService = this.service.secondaryServices?.find(
+    const secondaryService = this.service().secondaryServices?.find(
       (s) => s.title === service
     );
     if (secondaryService) {
@@ -44,7 +48,7 @@ export class ServiceCardComponent {
     let featuresAmount = 0;
     let addOnsAmount = 0;
 
-    this.service.secondaryServices?.forEach((secondaryService) => {
+    this.service().secondaryServices?.forEach((secondaryService) => {
       if (secondaryService.amount > 0) {
         if (secondaryService.type === 'feature') {
           featuresAmount += secondaryService.amount * secondaryService.price!;
@@ -59,13 +63,12 @@ export class ServiceCardComponent {
 
   calculateTotal() {
     this.serviceTotal = 0;
-    this.serviceTotal =
-      this.service.price + this.manageSecondaryServiceAmount();
+    this.serviceTotal = this.price() + this.manageSecondaryServiceAmount();
 
     this.selectedChange.emit({
-      service: this.service.title,
+      service: this.title(),
       price: this.serviceTotal,
-      selected: this.service.selected,
+      selected: this.selected(),
     });
   }
 }
