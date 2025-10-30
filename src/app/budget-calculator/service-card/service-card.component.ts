@@ -42,7 +42,7 @@ export class ServiceCardComponent {
 
   manageSecondaryServiceAmount() {
     let featuresAmount = 0;
-    let addOnsAmount = 0;
+    let addOnsAmount = 1; // by default one is always included
 
     this.service.secondaryServices?.forEach((secondaryService) => {
       if (secondaryService.amount > 0) {
