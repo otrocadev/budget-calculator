@@ -20,7 +20,7 @@ describe('BudgetCalculatorComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should initialize with total of 0', () => {
+  it('should initialize with the camp total of 0', () => {
     expect(component.total).toBe(0);
   });
 
