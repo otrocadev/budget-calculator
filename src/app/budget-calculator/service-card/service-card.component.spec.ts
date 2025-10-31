@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ComponentRef } from '@angular/core';
 import { ServiceCardComponent } from './service-card.component';
-import type { Service } from '../../../data/servicesData';
+import type { Service } from '../../../config/servicesConfig';
 
 describe('ServiceCardComponent', () => {
   let component: ServiceCardComponent;
@@ -156,83 +155,39 @@ describe('ServiceCardComponent', () => {
     expect(secondaryCards.length).toBe(2);
   });
 
-  it('should emit selectedChange when checkbox changes', () => {
+  it('should call budgetStateService.manageService when checkbox changes', () => {
     // Arrange
     component.service = mockedSEOService;
     fixture.detectChanges();
-    spyOn(component.selectedChange, 'emit');
+    spyOn(component.budgetStateService, 'manageService');
 
     // Act
     component.onCheckboxChange();
 
     // Assert
-    expect(component.selectedChange.emit).toHaveBeenCalledWith({
-      service: 'SEO',
+    expect(component.budgetStateService.manageService).toHaveBeenCalledWith({
+      title: 'SEO',
       price: 300,
       selected: false,
+      secondaryServices: undefined,
     });
   });
 
-  it('should calculate total correctly for service without secondary services', () => {
+  it('should call budgetStateService with correct data for service with secondary services', () => {
     // Arrange
-    component.service = { ...mockedSEOService, selected: true };
+    component.service = mockedWebService;
     fixture.detectChanges();
+    spyOn(component.budgetStateService, 'manageService');
 
     // Act
-    component.calculateTotal();
+    component.onCheckboxChange();
 
     // Assert
-    expect(component.serviceTotal).toBe(300);
-  });
-
-  it('should calculate total with secondary services (features and addOns)', () => {
-    // Arrange
-    const serviceWithSecondary = {
-      ...mockedWebService,
-      selected: true,
-      secondaryServices: [
-        {
-          title: 'pages',
-          type: 'feature' as const,
-          price: 30,
-          description: 'Pages',
-          amount: 2, // 2 pages
-        },
-        {
-          title: 'languages',
-          type: 'addOn' as const,
-          description: 'Languages',
-          amount: 1, // 1 additional language
-        },
-      ],
-    };
-    component.service = serviceWithSecondary;
-    fixture.detectChanges();
-
-    // Act
-    component.calculateTotal();
-
-    // Assert
-    // Base: 500
-    // Features: 2 pages * 30€ = 60€
-    // AddOns multiplier: 1 (default) + 1 (additional) = 2
-    // Secondary total: 60 * 2 = 120
-    // Total: 500 + 120 = 620
-    expect(component.serviceTotal).toBe(620);
-  });
-
-  it('should update secondary service amount when secondaryServicesChange is called', () => {
-    // Arrange
-    component.service = { ...mockedWebService, selected: true };
-    fixture.detectChanges();
-
-    // Act
-    component.secondaryServicesChange({ service: 'pages', amount: 3 });
-
-    // Assert
-    const pagesService = component.service.secondaryServices?.find(
-      (s) => s.title === 'pages'
-    );
-    expect(pagesService?.amount).toBe(3);
+    expect(component.budgetStateService.manageService).toHaveBeenCalledWith({
+      title: 'Web',
+      price: 500,
+      selected: false,
+      secondaryServices: mockedWebService.secondaryServices,
+    });
   });
 });

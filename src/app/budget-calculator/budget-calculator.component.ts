@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ServiceCardComponent } from './service-card/service-card.component';
-import { servicesData } from '../../data/servicesData';
+import { servicesConfig } from '../../config/servicesConfig';
+import { BudgetStateService } from '../../services/budgetStatusService';
 
 @Component({
   selector: 'app-budget-calculator',
@@ -9,45 +10,9 @@ import { servicesData } from '../../data/servicesData';
   styleUrl: './budget-calculator.component.css',
 })
 export class BudgetCalculatorComponent {
-  servicesData = servicesData;
-  serviceTotals: { service: string; price: number; selected: boolean }[] = [];
-  total: number = 0;
+  // config to show in the UI
+  servicesConfig = servicesConfig;
 
-  constructor() {
-    this.calculateTotal();
-  }
-
-  manageServiceTotals({
-    service,
-    price,
-    selected,
-  }: {
-    service: string;
-    price: number;
-    selected: boolean;
-  }) {
-    const existingIndex = this.serviceTotals.findIndex(
-      (s) => s.service === service
-    );
-
-    if (selected) {
-      if (existingIndex !== -1) {
-        this.serviceTotals[existingIndex] = { service, price, selected };
-      } else {
-        this.serviceTotals.push({ service, price, selected });
-      }
-    } else {
-      if (existingIndex !== -1) {
-        this.serviceTotals.splice(existingIndex, 1);
-      }
-    }
-    this.calculateTotal();
-  }
-
-  calculateTotal() {
-    this.total = 0;
-    this.serviceTotals.forEach((totalServiceAmount) => {
-      this.total = this.total + totalServiceAmount.price;
-    });
-  }
+  // injecting the states of the status service
+  budgetStateService = inject(BudgetStateService);
 }

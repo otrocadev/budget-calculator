@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ComponentRef } from '@angular/core';
 import { SecondaryServiceCardComponent } from './secondary-service-card.component';
-import type { SecondaryService } from '../../../data/servicesData';
+import type { SecondaryService } from '../../../config/servicesConfig';
 
 describe('SecondaryServiceCardComponent', () => {
   let component: SecondaryServiceCardComponent;
@@ -34,6 +34,7 @@ describe('SecondaryServiceCardComponent', () => {
 
   it('should create pages section', () => {
     // Arrange
+    fixture.componentRef.setInput('parentService', 'Web');
     fixture.componentRef.setInput('secondaryService', mockedPages);
     fixture.detectChanges();
 
@@ -43,6 +44,7 @@ describe('SecondaryServiceCardComponent', () => {
 
   it('should create languages section', () => {
     // Arrange
+    fixture.componentRef.setInput('parentService', 'Web');
     fixture.componentRef.setInput('secondaryService', mockedLanguages);
     fixture.detectChanges();
 
@@ -50,22 +52,25 @@ describe('SecondaryServiceCardComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render with required secondaryService input', () => {
+  it('should render with required inputs', () => {
     // Act
     const componentRef: ComponentRef<SecondaryServiceCardComponent> =
       fixture.componentRef;
+    componentRef.setInput('parentService', 'Web');
     componentRef.setInput('secondaryService', mockedPages);
     fixture.detectChanges();
 
     // Assert
     expect(component).toBeTruthy();
     expect(component.secondaryService()).toEqual(mockedPages);
+    expect(component.parentService()).toBe('Web');
   });
 
   it('should display "Number of additional " + the secondary service title in the template if it is an addOn', () => {
     // Act
     const componentRef: ComponentRef<SecondaryServiceCardComponent> =
       fixture.componentRef;
+    componentRef.setInput('parentService', 'Web');
     componentRef.setInput('secondaryService', mockedLanguages);
     fixture.detectChanges();
 
@@ -81,6 +86,7 @@ describe('SecondaryServiceCardComponent', () => {
     // Act
     const componentRef: ComponentRef<SecondaryServiceCardComponent> =
       fixture.componentRef;
+    componentRef.setInput('parentService', 'Web');
     componentRef.setInput('secondaryService', mockedPages);
     fixture.detectChanges();
 
@@ -94,6 +100,7 @@ describe('SecondaryServiceCardComponent', () => {
     // Act
     const componentRef: ComponentRef<SecondaryServiceCardComponent> =
       fixture.componentRef;
+    componentRef.setInput('parentService', 'Web');
     componentRef.setInput('secondaryService', mockedLanguages);
     fixture.detectChanges();
 
@@ -108,25 +115,39 @@ describe('SecondaryServiceCardComponent', () => {
     expect(numberInput).toBeTruthy();
   });
 
-  it('should initialize with amountCounter at 0', () => {
+  it('should display initial amount from secondaryService', () => {
     // Act
     const componentRef: ComponentRef<SecondaryServiceCardComponent> =
       fixture.componentRef;
+    componentRef.setInput('parentService', 'Web');
     componentRef.setInput('secondaryService', mockedLanguages);
     fixture.detectChanges();
 
     // Assert
-    expect(component.amountCounter).toBe(0);
+    expect(component.secondaryService().amount).toBe(0);
   });
 
-  it('should update amountCounter when + button is clicked', () => {
-    // Act
+  it('should call budgetStateService.manageSecondaryService when amount changes', () => {
+    // Arrange
     const componentRef: ComponentRef<SecondaryServiceCardComponent> =
       fixture.componentRef;
-    componentRef.setInput('secondaryService', mockedLanguages);
+    componentRef.setInput('parentService', 'Web');
+    componentRef.setInput('secondaryService', mockedPages);
     fixture.detectChanges();
+    spyOn(component.budgetStateService, 'manageSecondaryService');
+
+    // Act
+    component.emitAmountChange();
 
     // Assert
-    expect(component.amountCounter).toBe(0);
+    expect(
+      component.budgetStateService.manageSecondaryService
+    ).toHaveBeenCalledWith({
+      parentService: 'Web',
+      title: 'pages',
+      amount: 0,
+      type: 'feature',
+      price: 30,
+    });
   });
 });

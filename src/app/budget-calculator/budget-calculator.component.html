@@ -1,12 +1,9 @@
 <section id="services-calculator">
-  @for(service of servicesData; track service.title) {
-  <app-service-card
-    [service]="service"
-    (selectedChange)="manageServiceTotals($event)"
-  ></app-service-card>
+  @for(service of servicesConfig; track service.title) {
+  <app-service-card [service]="service"></app-service-card>
   }
   <span id="total-price"
     ><p>Total:</p>
-    <p>{{ total }}€</p></span
+    <p>{{ budgetStateService.total() }}€</p></span
   >
 </section>
