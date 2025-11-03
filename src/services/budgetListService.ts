@@ -4,6 +4,7 @@ import {
   isNameValid,
   isPhoneValid,
 } from '../utils/validtionChecks';
+import { isEmpty } from 'rxjs';
 
 type BudgetInfo = {
   name: string;
@@ -19,7 +20,7 @@ type BudgetServicesList = {
 
 type BudgetService = {
   title: string;
-  secondaryServices: BudgetSecondaryService[] | undefined;
+  secondaryServices?: BudgetSecondaryService[];
 };
 
 type BudgetSecondaryService = {
@@ -53,6 +54,12 @@ export class BudgetListService {
     }
   }
 
+  private checkServices(budgetServices: BudgetServicesList) {
+    if (budgetServices.services.length === 0) {
+      this._errorStatus.set('empty');
+    }
+  }
+
   public addBudget(budget: BudgetInfo) {
     this._errorStatus.set('valid');
     this.checkName(budget.name);
@@ -64,6 +71,10 @@ export class BudgetListService {
       return;
     }
     this.checkPhone(budget.phone);
+    if (this.errorStatus() !== 'valid') {
+      return;
+    }
+    this.checkServices(budget.budgetServices);
     if (this.errorStatus() !== 'valid') {
       return;
     }
