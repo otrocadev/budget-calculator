@@ -3,18 +3,10 @@
   grid-template-columns: 2fr 1fr 1fr;
   align-items: center;
   max-width: var(--container-max-width);
-  border-radius: 1rem;
+  border-radius: var(--card-border-radius);
   padding: 2rem 4rem;
   column-gap: 2rem;
   row-gap: 1rem;
-
-  background-color: var(--theme-1-light);
-  border: 1px solid var(--details-light);
-
-  @media (prefers-color-scheme: dark) {
-    background-color: var(--theme-1-dark);
-    border-color: var(--details-dark);
-  }
 
   @media (max-width: 600px) {
     grid-template-columns: 1fr;
