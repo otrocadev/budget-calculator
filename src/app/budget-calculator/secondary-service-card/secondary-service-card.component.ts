@@ -1,7 +1,7 @@
 import { Component, input, inject, signal, Signal } from '@angular/core';
 import type { SecondaryService } from '../../../config/servicesConfig';
 import { FormsModule } from '@angular/forms';
-import { ModalInfoComponent } from '../../modal-info/modal-info.component';
+import { ModalInfoComponent } from '../modal-info/modal-info.component';
 import { Dialog } from '@angular/cdk/dialog';
 import { BudgetStateService } from '../../../services/budgetStatusService';
 
