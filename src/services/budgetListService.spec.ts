@@ -34,7 +34,7 @@ describe('BudgetListService', () => {
       total: 0,
     });
     expect(service.listOfBudgets().length).toBe(0);
-    expect(service.errorStatus()).toBe('empty');
+    expect(service.errorStatus()).toEqual(['name', 'empty']);
   });
 
   it('should NOT add a budget if name camp is not a string', () => {
@@ -49,7 +49,7 @@ describe('BudgetListService', () => {
       total: 0,
     });
     expect(service.listOfBudgets().length).toBe(0);
-    expect(service.errorStatus()).toBe('notString');
+    expect(service.errorStatus()).toEqual(['name', 'notString']);
   });
 
   it('should NOT add a budget if name includes numbers', () => {
@@ -63,7 +63,7 @@ describe('BudgetListService', () => {
       total: 0,
     });
     expect(service.listOfBudgets().length).toBe(0);
-    expect(service.errorStatus()).toBe('notLettersOnly');
+    expect(service.errorStatus()).toEqual(['name', 'notLettersOnly']);
   });
 
   it('should NOT add a budget if name is too short', () => {
@@ -77,7 +77,7 @@ describe('BudgetListService', () => {
       total: 0,
     });
     expect(service.listOfBudgets().length).toBe(0);
-    expect(service.errorStatus()).toBe('notEnoughChars');
+    expect(service.errorStatus()).toEqual(['name', 'notEnoughChars']);
   });
 
   // email usecases
@@ -92,7 +92,7 @@ describe('BudgetListService', () => {
       total: 0,
     });
     expect(service.listOfBudgets().length).toBe(0);
-    expect(service.errorStatus()).toBe('empty');
+    expect(service.errorStatus()).toEqual(['email', 'empty']);
   });
 
   it('should NOT add a budget if email camp is not a string', () => {
@@ -107,7 +107,7 @@ describe('BudgetListService', () => {
       total: 0,
     });
     expect(service.listOfBudgets().length).toBe(0);
-    expect(service.errorStatus()).toBe('notString');
+    expect(service.errorStatus()).toEqual(['email', 'notString']);
   });
 
   it('should NOT add a budget if email does not include @', () => {
@@ -121,7 +121,7 @@ describe('BudgetListService', () => {
       total: 0,
     });
     expect(service.listOfBudgets().length).toBe(0);
-    expect(service.errorStatus()).toBe('notArroba');
+    expect(service.errorStatus()).toEqual(['email', 'notArroba']);
   });
 
   it('should NOT add a budget if email does not include . after @', () => {
@@ -135,7 +135,7 @@ describe('BudgetListService', () => {
       total: 0,
     });
     expect(service.listOfBudgets().length).toBe(0);
-    expect(service.errorStatus()).toBe('notDot');
+    expect(service.errorStatus()).toEqual(['email', 'notDot']);
   });
 
   // phone usecases
@@ -150,7 +150,7 @@ describe('BudgetListService', () => {
       total: 0,
     });
     expect(service.listOfBudgets().length).toBe(0);
-    expect(service.errorStatus()).toBe('empty');
+    expect(service.errorStatus()).toEqual(['phone', 'empty']);
   });
 
   it('should NOT add a budget if phone camp is not a string', () => {
@@ -165,7 +165,7 @@ describe('BudgetListService', () => {
       total: 0,
     });
     expect(service.listOfBudgets().length).toBe(0);
-    expect(service.errorStatus()).toBe('notString');
+    expect(service.errorStatus()).toEqual(['phone', 'notString']);
   });
 
   it('should NOT add a budget if phone contains chars that are not numbers', () => {
@@ -179,7 +179,7 @@ describe('BudgetListService', () => {
       total: 0,
     });
     expect(service.listOfBudgets().length).toBe(0);
-    expect(service.errorStatus()).toBe('notNumbersOnly');
+    expect(service.errorStatus()).toEqual(['phone', 'notNumbersOnly']);
   });
 
   it('should NOT add a budget if phone is too short', () => {
@@ -193,7 +193,7 @@ describe('BudgetListService', () => {
       total: 0,
     });
     expect(service.listOfBudgets().length).toBe(0);
-    expect(service.errorStatus()).toBe('notEnoughChars');
+    expect(service.errorStatus()).toEqual(['phone', 'notEnoughChars']);
   });
 
   it('should NOT add a budget if phone is too long', () => {
@@ -207,7 +207,7 @@ describe('BudgetListService', () => {
       total: 0,
     });
     expect(service.listOfBudgets().length).toBe(0);
-    expect(service.errorStatus()).toBe('moreThanAcceptedChars');
+    expect(service.errorStatus()).toEqual(['phone', 'moreThanAcceptedChars']);
   });
 
   // check services usecases
@@ -222,6 +222,6 @@ describe('BudgetListService', () => {
       total: 0,
     });
     expect(service.listOfBudgets().length).toBe(0);
-    expect(service.errorStatus()).toBe('empty');
+    expect(service.errorStatus()).toEqual(['services', 'empty']);
   });
 });

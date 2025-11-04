@@ -4,8 +4,9 @@ import {
   isNameValid,
   isPhoneValid,
 } from '../utils/validtionChecks';
+import type { ErrorType } from '../types/validationTypes';
 
-type BudgetInfo = {
+export type BudgetInfo = {
   name: string;
   email: string;
   phone: string;
@@ -30,51 +31,51 @@ type BudgetSecondaryService = {
 @Injectable({ providedIn: 'root' })
 export class BudgetListService {
   private _listOfBudgets = signal<BudgetInfo[]>([]);
-  private _errorStatus = signal<string>('valid');
+  private _errorStatus = signal<[string, ErrorType]>(['valid', 'valid']);
 
   public listOfBudgets = this._listOfBudgets.asReadonly();
   public errorStatus = this._errorStatus.asReadonly();
 
   private checkName(name: string) {
     if (isNameValid(name) !== 'valid') {
-      this._errorStatus.set(isNameValid(name));
+      this._errorStatus.set(['name', isNameValid(name)]);
     }
   }
 
   private checkEmail(email: string) {
     if (isEmailValid(email) !== 'valid') {
-      this._errorStatus.set(isEmailValid(email));
+      this._errorStatus.set(['email', isEmailValid(email)]);
     }
   }
 
   private checkPhone(phone: string) {
     if (isPhoneValid(phone) !== 'valid') {
-      this._errorStatus.set(isPhoneValid(phone));
+      this._errorStatus.set(['phone', isPhoneValid(phone)]);
     }
   }
 
   private checkServices(budgetServices: BudgetServicesList) {
     if (budgetServices.services.length === 0) {
-      this._errorStatus.set('empty');
+      this._errorStatus.set(['services', 'empty']);
     }
   }
 
   public addBudget(budget: BudgetInfo) {
-    this._errorStatus.set('valid');
+    this._errorStatus.set(['valid', 'valid']);
     this.checkName(budget.name);
-    if (this.errorStatus() !== 'valid') {
+    if (this.errorStatus()[1] !== 'valid') {
       return;
     }
     this.checkEmail(budget.email);
-    if (this.errorStatus() !== 'valid') {
+    if (this.errorStatus()[1] !== 'valid') {
       return;
     }
     this.checkPhone(budget.phone);
-    if (this.errorStatus() !== 'valid') {
+    if (this.errorStatus()[1] !== 'valid') {
       return;
     }
     this.checkServices(budget.budgetServices);
-    if (this.errorStatus() !== 'valid') {
+    if (this.errorStatus()[1] !== 'valid') {
       return;
     }
     this._listOfBudgets.update((budgets) => [...budgets, budget]);
