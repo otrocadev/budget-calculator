@@ -207,7 +207,7 @@ describe('BudgetListService', () => {
       total: 0,
     });
     expect(service.listOfBudgets().length).toBe(0);
-    expect(service.errorStatus()).toBe('notEnoughChars');
+    expect(service.errorStatus()).toBe('moreThanAcceptedChars');
   });
 
   // check services usecases
