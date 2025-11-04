@@ -1,0 +1,26 @@
+<article class="card budget-info-card">
+  <div>
+    <h3>{{ budget()?.name }}</h3>
+    <p>{{ budget()?.email }}</p>
+    <p>{{ budget()?.phone }}</p>
+  </div>
+  <div>
+    <h4>Services</h4>
+    @for(service of budget()?.budgetServices; track $index) {
+    <p>
+      - {{ service.title }}
+      @if(service.secondaryServices && service.secondaryServices.length > 0) {
+      <span>(</span>
+      @for(secondaryService of service.secondaryServices; track $index) {
+      {{ secondaryService.amount }} {{ secondaryService.title }}
+      @if(!$last) { , } }
+      <span>)</span>
+      }
+    </p>
+    }
+  </div>
+  <div>
+    <h4>Total</h4>
+    <p class="total-amount">{{ budget()?.total }}€</p>
+  </div>
+</article>

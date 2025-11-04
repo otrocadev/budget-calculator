@@ -54,9 +54,7 @@ export class BudgetApplicationFormComponent {
       name: this.formData.name,
       email: this.formData.email,
       phone: this.formData.phone,
-      budgetServices: {
-        services: this.services,
-      },
+      budgetServices: this.services,
       total: this.budgetStateService.total(),
     });
     this.getErrorStatus();

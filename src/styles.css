@@ -1,3 +1,9 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 :root {
   --accent-font-light: #005f25;
   --details-light: #2e4a66;
@@ -16,8 +22,6 @@
   --font-size-l: 1.5rem;
 
   --card-border-radius: 1rem;
-
-  --container-max-width: 600px;
 }
 
 @font-face {

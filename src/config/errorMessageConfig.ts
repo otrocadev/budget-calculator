@@ -15,7 +15,7 @@ export const ERROR_MESSAGES: Record<
     empty: 'Email is required',
     notString: 'Email must be a string',
     notArroba: 'Email must contain @',
-    notDot: 'Email must contain .',
+    notDot: 'Email must contain a dot after an @',
   },
   phone: {
     empty: 'Phone is required',
