@@ -27,3 +27,13 @@ input {
     border-color: var(--details-dark);
   }
 }
+
+.error-status {
+  border-color: var(--error-color);
+}
+
+.error-message {
+  color: var(--error-color);
+  font-size: var(--font-size-m);
+  margin: 0;
+}

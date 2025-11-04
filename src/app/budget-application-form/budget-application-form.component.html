@@ -1,4 +1,9 @@
-<section class="card form-card">
+<section
+  class="card form-card"
+  [ngClass]="
+    budgetListService.errorStatus()[1] === 'valid' ? '' : 'error-status'
+  "
+>
   <h2>Ask for a budget</h2>
   <form (ngSubmit)="onSubmit()">
     <input
@@ -24,4 +29,7 @@
     />
     <button type="submit">Submit</button>
   </form>
+  @if (budgetListService.errorStatus()[1] !== 'valid') {
+  <p class="error-message">{{ errorStatusMessage() }}</p>
+  }
 </section>

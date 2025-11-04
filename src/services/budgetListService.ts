@@ -5,12 +5,15 @@ import {
   isPhoneValid,
 } from '../utils/validtionChecks';
 import type { ErrorType } from '../types/validationTypes';
+import type { FormInputType } from '../types/validationTypes';
 import type { BudgetInfo, BudgetServicesList } from '../types/budgetTypes';
 
 @Injectable({ providedIn: 'root' })
 export class BudgetListService {
   private _listOfBudgets = signal<BudgetInfo[]>([]);
-  private _errorStatus = signal<[string, ErrorType]>(['valid', 'valid']);
+  private _errorStatus = signal<
+    [FormInputType | 'services' | 'valid', ErrorType]
+  >(['valid', 'valid']);
 
   public listOfBudgets = this._listOfBudgets.asReadonly();
   public errorStatus = this._errorStatus.asReadonly();

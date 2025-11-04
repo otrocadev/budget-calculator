@@ -2,7 +2,7 @@ import type { ErrorType } from '../types/validationTypes';
 import type { FormInputType } from '../types/validationTypes';
 
 export const ERROR_MESSAGES: Record<
-  FormInputType | 'services',
+  FormInputType | 'services' | 'valid',
   Partial<Record<ErrorType, string>>
 > = {
   name: {
@@ -21,10 +21,13 @@ export const ERROR_MESSAGES: Record<
     empty: 'Phone is required',
     notString: 'Phone must be a string',
     notNumbersOnly: 'Phone must contain only numbers',
-    notEnoughChars: 'Phone must be at least 2 characters long',
+    notEnoughChars: 'Phone must be at least 6 characters long',
     moreThanAcceptedChars: 'Phone must be at most 9 characters long',
   },
   services: {
-    empty: 'Services is required',
+    empty: 'You need to select at least one service to create a budget',
+  },
+  valid: {
+    valid: 'All fields are valid',
   },
 };
