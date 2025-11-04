@@ -1,4 +1,4 @@
-<article class="service-card" [ngClass]="{ selected: service.selected }">
+<article class="card service-card" [ngClass]="{ selected: service.selected }">
   <section>
     <h3 class="service-title">{{ service.title }}</h3>
     <span>{{ service.description }}</span>
@@ -17,8 +17,8 @@
     @for (secondaryService of service.secondaryServices; track
     secondaryService.title) {
     <app-secondary-service-card
+      [parentService]="service.title"
       [secondaryService]="secondaryService"
-      (serviceAmount)="secondaryServicesChange($event)"
     ></app-secondary-service-card>
     }
   </section>

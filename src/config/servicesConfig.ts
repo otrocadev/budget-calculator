@@ -14,7 +14,7 @@ export type SecondaryService = {
   amount: number;
 };
 
-export const servicesData: Service[] = [
+export const servicesConfig: Service[] = [
   {
     title: 'SEO',
     description: "Programació d'una web responsive complerta",

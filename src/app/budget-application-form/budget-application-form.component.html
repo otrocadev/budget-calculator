@@ -1,0 +1,35 @@
+<section
+  class="card form-card"
+  [ngClass]="
+    budgetListService.errorStatus()[1] === 'valid' ? '' : 'error-status'
+  "
+>
+  <h2>Ask for a budget</h2>
+  <form (ngSubmit)="onSubmit()">
+    <input
+      type="text"
+      id="form_name"
+      name="name"
+      placeholder="Name"
+      [(ngModel)]="formData.name"
+    />
+    <input
+      type="email"
+      id="form_email"
+      name="email"
+      placeholder="Email"
+      [(ngModel)]="formData.email"
+    />
+    <input
+      type="text"
+      id="form_phone"
+      name="phone"
+      placeholder="Phone"
+      [(ngModel)]="formData.phone"
+    />
+    <button type="submit">Submit</button>
+  </form>
+  @if (budgetListService.errorStatus()[1] !== 'valid') {
+  <p class="error-message">{{ errorStatusMessage() }}</p>
+  }
+</section>
