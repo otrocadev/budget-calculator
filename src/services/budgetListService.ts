@@ -5,28 +5,7 @@ import {
   isPhoneValid,
 } from '../utils/validtionChecks';
 import type { ErrorType } from '../types/validationTypes';
-
-export type BudgetInfo = {
-  name: string;
-  email: string;
-  phone: string;
-  budgetServices: BudgetServicesList;
-  total: number;
-};
-
-type BudgetServicesList = {
-  services: BudgetService[];
-};
-
-type BudgetService = {
-  title: string;
-  secondaryServices?: BudgetSecondaryService[];
-};
-
-type BudgetSecondaryService = {
-  title: string;
-  amount: number;
-};
+import type { BudgetInfo, BudgetServicesList } from '../types/budgetTypes';
 
 @Injectable({ providedIn: 'root' })
 export class BudgetListService {

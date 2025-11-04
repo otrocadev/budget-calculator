@@ -1,6 +1,8 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, Signal, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BudgetListService } from '../../services/budgetListService';
+import { BudgetStateService } from '../../services/budgetStatusService';
+import type { BudgetService } from '../../types/budgetTypes';
 
 @Component({
   selector: 'app-budget-application-form',
@@ -10,6 +12,9 @@ import { BudgetListService } from '../../services/budgetListService';
 })
 export class BudgetApplicationFormComponent {
   budgetListService = inject(BudgetListService);
+  budgetStateService = inject(BudgetStateService);
+
+  private services: BudgetService[] = [];
 
   formData = {
     name: '',
@@ -17,18 +22,29 @@ export class BudgetApplicationFormComponent {
     phone: '',
   };
 
+  private manageServices() {
+    this.services = [];
+    this.budgetStateService.services().forEach((service) => {
+      if (service.selected) {
+        let newService = {
+          title: service.title,
+          secondaryServices: service.secondaryServices,
+        };
+        this.services.push(newService);
+      }
+    });
+  }
+
   onSubmit() {
+    this.manageServices();
     this.budgetListService.addBudget({
       name: this.formData.name,
       email: this.formData.email,
       phone: this.formData.phone,
       budgetServices: {
-        services: [{ title: 'patata' }],
+        services: this.services,
       },
-      total: 20,
+      total: this.budgetStateService.total(),
     });
-    console.log(this.formData);
-    console.log(this.budgetListService.errorStatus());
-    console.log(this.budgetListService.listOfBudgets());
   }
 }
