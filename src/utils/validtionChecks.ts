@@ -1,12 +1,4 @@
-// Error types
-type ErrorType =
-  | 'empty'
-  | 'notString'
-  | 'notEnoughChars'
-  | 'notLettersOnly'
-  | 'notNumbersOnly'
-  | 'notAlphanumeric'
-  | 'notArroba';
+import type { ErrorType } from '../types/validationTypes';
 
 // Basic checks
 const notEmpty = (value: string) => {
@@ -38,7 +30,7 @@ const isAlphanumeric = (value: string) => {
 };
 
 // Form input checks
-export const isNameValid = (name: string) => {
+export const isNameValid = (name: string): ErrorType => {
   if (typeof name !== 'string') {
     return 'notString';
   }
@@ -54,15 +46,12 @@ export const isNameValid = (name: string) => {
   return 'valid';
 };
 
-export const isEmailValid = (email: string) => {
+export const isEmailValid = (email: string): ErrorType => {
   if (typeof email !== 'string') {
     return 'notString';
   }
   if (!notEmpty(email)) {
     return 'empty';
-  }
-  if (typeof email !== 'string') {
-    return 'notString';
   }
   if (!email.includes('@')) {
     return 'notArroba';
@@ -73,7 +62,7 @@ export const isEmailValid = (email: string) => {
   return 'valid';
 };
 
-export const isPhoneValid = (phone: string) => {
+export const isPhoneValid = (phone: string): ErrorType => {
   if (typeof phone !== 'string') {
     return 'notString';
   }
@@ -83,11 +72,11 @@ export const isPhoneValid = (phone: string) => {
   if (!isOnlyNumbers(phone)) {
     return 'notNumbersOnly';
   }
-  if (!isLessThanChars(phone)) {
+  if (!isMoreThanChars(phone, 6)) {
     return 'notEnoughChars';
   }
-  if (!isMoreThanChars(phone, 9)) {
-    return 'notEnoughChars';
+  if (!isLessThanChars(phone, 10)) {
+    return 'moreThanAcceptedChars';
   }
   return 'valid';
 };
