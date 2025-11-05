@@ -1,21 +1,10 @@
 import { Injectable, signal } from '@angular/core';
-import type { SecondaryService } from '../config/servicesConfig';
 import { servicesConfig } from '../config/servicesConfig';
 
-type Service = {
-  title: string;
-  price: number;
-  selected: boolean;
-  secondaryServices?: SecondaryService[];
-};
-
-type SecondaryServiceState = {
-  parentService: string;
-  title: string;
-  amount: number;
-  type: 'addOn' | 'feature';
-  price?: number;
-};
+import type {
+  Service,
+  SecondaryServiceState,
+} from '../types/budgetStatusTypes';
 
 @Injectable({ providedIn: 'root' })
 export class BudgetStateService {

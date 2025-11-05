@@ -17,19 +17,19 @@ export type SecondaryService = {
 export const servicesConfig: Service[] = [
   {
     title: 'SEO',
-    description: "Programació d'una web responsive complerta",
+    description: 'SEO optimization for your website',
     price: 300,
     selected: false,
   },
   {
     title: 'Ads',
-    description: 'Campanya de Google o Facebook ads',
+    description: 'Google or Facebook ads campaign',
     price: 400,
     selected: false,
   },
   {
     title: 'Web',
-    description: "Programació d'una web responsive complerta",
+    description: 'Programing a custom responsive website',
     price: 500,
     selected: false,
     secondaryServices: [
