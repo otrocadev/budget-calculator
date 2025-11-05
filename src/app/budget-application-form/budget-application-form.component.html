@@ -5,7 +5,7 @@
   "
 >
   <h2>Ask for a budget</h2>
-  <form (ngSubmit)="onSubmit()">
+  <form (ngSubmit)="onSubmit()" (submit)="$event.preventDefault()">
     <input
       type="text"
       id="form_name"

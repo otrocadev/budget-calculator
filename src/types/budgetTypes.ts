@@ -2,12 +2,8 @@ export type BudgetInfo = {
   name: string;
   email: string;
   phone: string;
-  budgetServices: BudgetServicesList;
+  budgetServices: BudgetService[];
   total: number;
-};
-
-export type BudgetServicesList = {
-  services: BudgetService[];
 };
 
 export type BudgetService = {

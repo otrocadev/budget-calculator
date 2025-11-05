@@ -6,7 +6,7 @@ import {
 } from '../utils/validtionChecks';
 import type { ErrorType } from '../types/validationTypes';
 import type { FormInputType } from '../types/validationTypes';
-import type { BudgetInfo, BudgetServicesList } from '../types/budgetTypes';
+import type { BudgetInfo, BudgetService } from '../types/budgetTypes';
 
 @Injectable({ providedIn: 'root' })
 export class BudgetListService {
@@ -17,6 +17,12 @@ export class BudgetListService {
 
   public listOfBudgets = this._listOfBudgets.asReadonly();
   public errorStatus = this._errorStatus.asReadonly();
+
+  private checkServices(budgetServices: BudgetService[]) {
+    if (budgetServices.length === 0) {
+      this._errorStatus.set(['services', 'empty']);
+    }
+  }
 
   private checkName(name: string) {
     if (isNameValid(name) !== 'valid') {
@@ -36,14 +42,12 @@ export class BudgetListService {
     }
   }
 
-  private checkServices(budgetServices: BudgetServicesList) {
-    if (budgetServices.services.length === 0) {
-      this._errorStatus.set(['services', 'empty']);
-    }
-  }
-
   public addBudget(budget: BudgetInfo) {
     this._errorStatus.set(['valid', 'valid']);
+    this.checkServices(budget.budgetServices);
+    if (this.errorStatus()[1] !== 'valid') {
+      return;
+    }
     this.checkName(budget.name);
     if (this.errorStatus()[1] !== 'valid') {
       return;
@@ -53,10 +57,6 @@ export class BudgetListService {
       return;
     }
     this.checkPhone(budget.phone);
-    if (this.errorStatus()[1] !== 'valid') {
-      return;
-    }
-    this.checkServices(budget.budgetServices);
     if (this.errorStatus()[1] !== 'valid') {
       return;
     }

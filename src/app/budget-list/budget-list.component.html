@@ -1,0 +1,8 @@
+@if(budgetListService.listOfBudgets().length >= 1) {
+<section id="budget-list-container">
+  <h2>Current budgets</h2>
+  @for(budget of budgetListService.listOfBudgets(); track $index) {
+  <app-budget-info-card [budget]="budget"></app-budget-info-card>
+  }
+</section>
+}
