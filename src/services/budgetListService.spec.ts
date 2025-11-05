@@ -16,8 +16,9 @@ describe('BudgetListService', () => {
       phone: '123456789',
       budgetServices: [{ title: 'Generic Service' }],
       total: 0,
+      date: '2024-10-05T09:37:04.643Z',
     });
-    expect(service.listOfBudgets().length).toBe(1);
+    expect(service.listOfBudgets().length).toBe(6);
   });
 
   // name usecases
@@ -28,8 +29,9 @@ describe('BudgetListService', () => {
       phone: '123456789',
       budgetServices: [{ title: 'Generic Service' }],
       total: 0,
+      date: '2024-10-05T09:37:04.643Z',
     });
-    expect(service.listOfBudgets().length).toBe(0);
+    expect(service.listOfBudgets().length).toBe(5);
     expect(service.errorStatus()).toEqual(['name', 'empty']);
   });
 
@@ -41,8 +43,9 @@ describe('BudgetListService', () => {
       phone: '123456789',
       budgetServices: [{ title: 'Generic Service' }],
       total: 0,
+      date: '2024-10-05T09:37:04.643Z',
     });
-    expect(service.listOfBudgets().length).toBe(0);
+    expect(service.listOfBudgets().length).toBe(5);
     expect(service.errorStatus()).toEqual(['name', 'notString']);
   });
 
@@ -53,8 +56,9 @@ describe('BudgetListService', () => {
       phone: '123456789',
       budgetServices: [{ title: 'Generic Service' }],
       total: 0,
+      date: '2024-10-05T09:37:04.643Z',
     });
-    expect(service.listOfBudgets().length).toBe(0);
+    expect(service.listOfBudgets().length).toBe(5);
     expect(service.errorStatus()).toEqual(['name', 'notLettersOnly']);
   });
 
@@ -65,8 +69,9 @@ describe('BudgetListService', () => {
       phone: '123456789',
       budgetServices: [{ title: 'Generic Service' }],
       total: 0,
+      date: '2024-10-05T09:37:04.643Z',
     });
-    expect(service.listOfBudgets().length).toBe(0);
+    expect(service.listOfBudgets().length).toBe(5);
     expect(service.errorStatus()).toEqual(['name', 'notEnoughChars']);
   });
 
@@ -78,8 +83,9 @@ describe('BudgetListService', () => {
       phone: '123456789',
       budgetServices: [{ title: 'Generic Service' }],
       total: 0,
+      date: '2024-10-05T09:37:04.643Z',
     });
-    expect(service.listOfBudgets().length).toBe(0);
+    expect(service.listOfBudgets().length).toBe(5);
     expect(service.errorStatus()).toEqual(['email', 'empty']);
   });
 
@@ -91,8 +97,9 @@ describe('BudgetListService', () => {
       phone: '123456789',
       budgetServices: [{ title: 'Generic Service' }],
       total: 0,
+      date: '2024-10-05T09:37:04.643Z',
     });
-    expect(service.listOfBudgets().length).toBe(0);
+    expect(service.listOfBudgets().length).toBe(5);
     expect(service.errorStatus()).toEqual(['email', 'notString']);
   });
 
@@ -103,8 +110,9 @@ describe('BudgetListService', () => {
       phone: '123456789',
       budgetServices: [{ title: 'Generic Service' }],
       total: 0,
+      date: '2024-10-05T09:37:04.643Z',
     });
-    expect(service.listOfBudgets().length).toBe(0);
+    expect(service.listOfBudgets().length).toBe(5);
     expect(service.errorStatus()).toEqual(['email', 'notArroba']);
   });
 
@@ -115,8 +123,9 @@ describe('BudgetListService', () => {
       phone: '123456789',
       budgetServices: [{ title: 'Generic Service' }],
       total: 0,
+      date: '2024-10-05T09:37:04.643Z',
     });
-    expect(service.listOfBudgets().length).toBe(0);
+    expect(service.listOfBudgets().length).toBe(5);
     expect(service.errorStatus()).toEqual(['email', 'notDot']);
   });
 
@@ -128,8 +137,9 @@ describe('BudgetListService', () => {
       phone: '',
       budgetServices: [{ title: 'Generic Service' }],
       total: 0,
+      date: '2024-10-05T09:37:04.643Z',
     });
-    expect(service.listOfBudgets().length).toBe(0);
+    expect(service.listOfBudgets().length).toBe(5);
     expect(service.errorStatus()).toEqual(['phone', 'empty']);
   });
 
@@ -141,8 +151,9 @@ describe('BudgetListService', () => {
       email: 'john.doe@example.com',
       budgetServices: [{ title: 'Generic Service' }],
       total: 0,
+      date: '2024-10-05T09:37:04.643Z',
     });
-    expect(service.listOfBudgets().length).toBe(0);
+    expect(service.listOfBudgets().length).toBe(5);
     expect(service.errorStatus()).toEqual(['phone', 'notString']);
   });
 
@@ -153,8 +164,9 @@ describe('BudgetListService', () => {
       phone: 'abc',
       budgetServices: [{ title: 'Generic Service' }],
       total: 0,
+      date: '2024-10-05T09:37:04.643Z',
     });
-    expect(service.listOfBudgets().length).toBe(0);
+    expect(service.listOfBudgets().length).toBe(5);
     expect(service.errorStatus()).toEqual(['phone', 'notNumbersOnly']);
   });
 
@@ -165,8 +177,9 @@ describe('BudgetListService', () => {
       phone: '12345',
       budgetServices: [{ title: 'Generic Service' }],
       total: 0,
+      date: '2024-10-05T09:37:04.643Z',
     });
-    expect(service.listOfBudgets().length).toBe(0);
+    expect(service.listOfBudgets().length).toBe(5);
     expect(service.errorStatus()).toEqual(['phone', 'notEnoughChars']);
   });
 
@@ -177,8 +190,9 @@ describe('BudgetListService', () => {
       phone: '12345678901',
       budgetServices: [{ title: 'Generic Service' }],
       total: 0,
+      date: '2024-10-05T09:37:04.643Z',
     });
-    expect(service.listOfBudgets().length).toBe(0);
+    expect(service.listOfBudgets().length).toBe(5);
     expect(service.errorStatus()).toEqual(['phone', 'moreThanAcceptedChars']);
   });
 
@@ -190,8 +204,9 @@ describe('BudgetListService', () => {
       phone: '123456789',
       budgetServices: [],
       total: 0,
+      date: '2024-10-05T09:37:04.643Z',
     });
-    expect(service.listOfBudgets().length).toBe(0);
+    expect(service.listOfBudgets().length).toBe(5);
     expect(service.errorStatus()).toEqual(['services', 'empty']);
   });
 });

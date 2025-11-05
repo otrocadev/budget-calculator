@@ -1,8 +1,33 @@
-@if(budgetListService.listOfBudgets().length >= 1) {
 <section id="budget-list-container">
   <h2>Current budgets</h2>
-  @for(budget of budgetListService.listOfBudgets(); track $index) {
+  <div id="budget-lsit-filters-selection">
+    <form (ngSubmit)="onSubmit()" (submit)="$event.preventDefault()">
+      <input type="text" name="search" id="search" [(ngModel)]="search" />
+      <button type="submit">Search</button>
+      <label for="filterSelector">Sort by:</label>
+      <select
+        name="filterSelector"
+        id="filterSelector"
+        #sortSelect
+        (change)="budgetListService.orderList(sortSelect.value)"
+      >
+        <option value="default">...</option>
+        <option value="name-asc">Name ▲</option>
+        <option value="name-desc">Name ▼</option>
+        <option value="total-asc">Total ▲</option>
+        <option value="total-desc">Total ▼</option>
+        <option value="date-asc">Date ▲</option>
+        <option value="date-desc">Date ▼</option>
+      </select>
+    </form>
+  </div>
+  @if(budgetListService.listOfBudgets().length >= 1) { @for(budget of
+  budgetListService.listOfBudgets(); track $index) {
   <app-budget-info-card [budget]="budget"></app-budget-info-card>
+  } } @else {
+  <div class="no-results-found">
+    <p>No budgets found 🧶</p>
+    <img src="/images/cute_cat.png" alt="" />
+  </div>
   }
 </section>
-}

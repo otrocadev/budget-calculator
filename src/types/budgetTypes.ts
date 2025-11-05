@@ -4,6 +4,7 @@ export type BudgetInfo = {
   phone: string;
   budgetServices: BudgetService[];
   total: number;
+  date: string;
 };
 
 export type BudgetService = {
