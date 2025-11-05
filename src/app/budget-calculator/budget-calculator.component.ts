@@ -33,12 +33,36 @@ export class BudgetCalculatorComponent {
     services.forEach((service) => {
       const isSelected = params[service.title.toLowerCase()] === 'true';
       if (isSelected !== service.selected) {
-        // They're different! Update the state to match the URL
         this.budgetStateService.manageService({
           ...service,
           selected: isSelected,
         });
       }
     });
+
+    // the timeout is needed to wait for the main services to be updated before updating the secondary services
+    setTimeout(() => {
+      const updatedServices = this.budgetStateService.services();
+      updatedServices.forEach((service) => {
+        if (service.secondaryServices && service.selected) {
+          service.secondaryServices.forEach((secondary) => {
+            const paramKey = `${service.title.toLowerCase()}_${
+              secondary.title
+            }`;
+            const amount = params[paramKey];
+
+            if (amount !== undefined && amount !== null) {
+              this.budgetStateService.manageSecondaryService({
+                parentService: service.title,
+                title: secondary.title,
+                amount: parseInt(amount, 10),
+                type: secondary.type,
+                price: secondary.price,
+              });
+            }
+          });
+        }
+      });
+    }, 0);
   }
 }
