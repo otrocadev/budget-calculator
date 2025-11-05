@@ -95,7 +95,7 @@ describe('ServiceCardComponent', () => {
     const checkbox = compiled.querySelector('input[type="checkbox"]');
     const label = compiled.querySelector('label');
     expect(checkbox).toBeTruthy();
-    expect(label?.textContent).toContain('Afegir');
+    expect(label?.textContent).toContain('Add');
   });
 
   it('should apply selected class when service is selected', () => {
