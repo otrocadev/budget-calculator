@@ -7,13 +7,16 @@ import {
 import type { ErrorType } from '../types/validationTypes';
 import type { FormInputType } from '../types/validationTypes';
 import type { BudgetInfo, BudgetService } from '../types/budgetTypes';
+import { budgetMocks } from '../config/mocks/budgetMocks';
 
 @Injectable({ providedIn: 'root' })
 export class BudgetListService {
-  private _listOfBudgets = signal<BudgetInfo[]>([]);
+  private _listOfBudgets = signal<BudgetInfo[]>(budgetMocks);
   private _errorStatus = signal<
     [FormInputType | 'services' | 'valid', ErrorType]
   >(['valid', 'valid']);
+
+  private _backupListOfBudgets = signal<BudgetInfo[] | undefined>(undefined);
 
   public listOfBudgets = this._listOfBudgets.asReadonly();
   public errorStatus = this._errorStatus.asReadonly();
@@ -61,5 +64,73 @@ export class BudgetListService {
       return;
     }
     this._listOfBudgets.update((budgets) => [...budgets, budget]);
+  }
+
+  public orderList(option: string) {
+    if (option === 'name-asc') {
+      this.orderByName(true);
+    } else if (option === 'name-desc') {
+      this.orderByName(false);
+    } else if (option === 'total-asc') {
+      this.orderByTotal(true);
+    } else if (option === 'total-desc') {
+      this.orderByTotal(false);
+    } else if (option === 'date-asc') {
+      this.orderByDate(true);
+    } else if (option === 'date-desc') {
+      this.orderByDate(false);
+    }
+  }
+
+  private orderByTotal(asc: boolean) {
+    if (asc) {
+      this._listOfBudgets.update((budgets) =>
+        [...budgets].sort((a, b) => a.total - b.total)
+      );
+    }
+    if (!asc) {
+      this._listOfBudgets.update((budgets) =>
+        [...budgets].sort((a, b) => b.total - a.total)
+      );
+    }
+  }
+
+  private orderByName(asc: boolean) {
+    if (asc) {
+      this._listOfBudgets.update((budgets) =>
+        [...budgets].sort((a, b) => a.name.localeCompare(b.name))
+      );
+    }
+    if (!asc) {
+      this._listOfBudgets.update((budgets) =>
+        [...budgets].sort((a, b) => b.name.localeCompare(a.name))
+      );
+    }
+  }
+
+  private orderByDate(asc: boolean) {
+    if (asc) {
+      this._listOfBudgets.update((budgets) =>
+        [...budgets].sort((a, b) => a.date.localeCompare(b.date))
+      );
+    }
+    if (!asc) {
+      this._listOfBudgets.update((budgets) =>
+        [...budgets].sort((a, b) => b.date.localeCompare(a.date))
+      );
+    }
+  }
+
+  public searchByName(name: string) {
+    if (this._backupListOfBudgets() === undefined) {
+      this._backupListOfBudgets.set(this._listOfBudgets());
+    }
+    this._listOfBudgets.set(this._backupListOfBudgets() || []);
+
+    this._listOfBudgets.update((budgets) =>
+      budgets.filter((budget) =>
+        budget.name.toLowerCase().includes(name.toLowerCase())
+      )
+    );
   }
 }

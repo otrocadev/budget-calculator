@@ -36,4 +36,12 @@ export const budgetMocks: BudgetInfo[] = [
     total: 300,
     date: '2025-08-31T09:37:04.643Z',
   },
+  {
+    name: 'Carlos M.',
+    email: 'carlos.zen@gmail.com',
+    phone: '1234566789',
+    budgetServices: [{ title: 'Web' }],
+    total: 300,
+    date: '2025-08-31T09:39:04.643Z',
+  },
 ];
