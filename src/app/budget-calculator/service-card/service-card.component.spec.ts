@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ServiceCardComponent } from './service-card.component';
-import type { Service } from '../../../config/servicesConfig';
+import type { ServiceConfig } from '../../../config/servicesConfig';
 
 describe('ServiceCardComponent', () => {
   let component: ServiceCardComponent;
   let fixture: ComponentFixture<ServiceCardComponent>;
 
   // Mock services for testing
-  const mockedSEOService: Service = {
+  const mockedSEOService: ServiceConfig = {
     title: 'SEO',
     description: "Programació d'una web responsive complerta",
     price: 300,
     selected: false,
   };
 
-  const mockedWebService: Service = {
+  const mockedWebService: ServiceConfig = {
     title: 'Web',
     description: "Programació d'una web responsive complerta",
     price: 500,

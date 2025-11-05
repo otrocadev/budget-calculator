@@ -1,4 +1,4 @@
-export type Service = {
+export type ServiceConfig = {
   title: string;
   description: string;
   price: number;
@@ -14,7 +14,7 @@ export type SecondaryService = {
   amount: number;
 };
 
-export const servicesConfig: Service[] = [
+export const servicesConfig: ServiceConfig[] = [
   {
     title: 'SEO',
     description: 'SEO optimization for your website',
