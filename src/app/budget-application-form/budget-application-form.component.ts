@@ -56,6 +56,7 @@ export class BudgetApplicationFormComponent {
       phone: this.formData.phone,
       budgetServices: this._services,
       total: this.budgetStateService.total(),
+      date: new Date().toISOString(),
     });
     this.getErrorStatus();
   }

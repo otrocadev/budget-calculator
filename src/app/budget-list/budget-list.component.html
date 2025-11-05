@@ -1,6 +1,22 @@
 @if(budgetListService.listOfBudgets().length >= 1) {
 <section id="budget-list-container">
   <h2>Current budgets</h2>
+  <div>
+    <select
+      name="filterSelector"
+      id="filterSelector"
+      #sortSelect
+      (change)="budgetListService.orderList(sortSelect.value)"
+    >
+      <option value="default">Sort by:</option>
+      <option value="name-asc">Name ▲</option>
+      <option value="name-desc">Name ▼</option>
+      <option value="total-asc">Total ▲</option>
+      <option value="total-desc">Total ▼</option>
+      <option value="date-asc">Date ▲</option>
+      <option value="date-desc">Date ▼</option>
+    </select>
+  </div>
   @for(budget of budgetListService.listOfBudgets(); track $index) {
   <app-budget-info-card [budget]="budget"></app-budget-info-card>
   }

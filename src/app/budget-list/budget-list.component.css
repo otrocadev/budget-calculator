@@ -14,3 +14,15 @@
     margin-bottom: 1rem;
   }
 }
+
+#filterSelector {
+  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--details-light);
+  font-family: system-ui, Arial, sans-serif;
+}
+
+#filterSelector:hover {
+  cursor: pointer;
+}
