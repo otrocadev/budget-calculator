@@ -16,7 +16,7 @@ export class BudgetApplicationFormComponent {
   budgetListService = inject(BudgetListService);
   budgetStateService = inject(BudgetStateService);
 
-  private services: BudgetService[] = [];
+  private _services: BudgetService[] = [];
   ERROR_MESSAGES = ERROR_MESSAGES;
 
   errorStatusMessage = signal<string | undefined>(undefined);
@@ -36,14 +36,14 @@ export class BudgetApplicationFormComponent {
   }
 
   private manageServices() {
-    this.services = [];
+    this._services = [];
     this.budgetStateService.services().forEach((service) => {
       if (service.selected) {
         let newService = {
           title: service.title,
           secondaryServices: service.secondaryServices,
         };
-        this.services.push(newService);
+        this._services.push(newService);
       }
     });
   }
@@ -54,7 +54,7 @@ export class BudgetApplicationFormComponent {
       name: this.formData.name,
       email: this.formData.email,
       phone: this.formData.phone,
-      budgetServices: this.services,
+      budgetServices: this._services,
       total: this.budgetStateService.total(),
     });
     this.getErrorStatus();

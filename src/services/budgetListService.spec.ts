@@ -14,9 +14,7 @@ describe('BudgetListService', () => {
       name: 'John Doe',
       email: 'john.doe@example.com',
       phone: '123456789',
-      budgetServices: {
-        services: [{ title: 'Generic Service' }],
-      },
+      budgetServices: [{ title: 'Generic Service' }],
       total: 0,
     });
     expect(service.listOfBudgets().length).toBe(1);
@@ -28,9 +26,7 @@ describe('BudgetListService', () => {
       name: '',
       email: 'john.doe@example.com',
       phone: '123456789',
-      budgetServices: {
-        services: [{ title: 'Generic Service' }],
-      },
+      budgetServices: [{ title: 'Generic Service' }],
       total: 0,
     });
     expect(service.listOfBudgets().length).toBe(0);
@@ -43,9 +39,7 @@ describe('BudgetListService', () => {
       name: 123,
       email: 'john.doe@example.com',
       phone: '123456789',
-      budgetServices: {
-        services: [{ title: 'Generic Service' }],
-      },
+      budgetServices: [{ title: 'Generic Service' }],
       total: 0,
     });
     expect(service.listOfBudgets().length).toBe(0);
@@ -57,9 +51,7 @@ describe('BudgetListService', () => {
       name: 'John99',
       email: 'john.doe@example.com',
       phone: '123456789',
-      budgetServices: {
-        services: [{ title: 'Generic Service' }],
-      },
+      budgetServices: [{ title: 'Generic Service' }],
       total: 0,
     });
     expect(service.listOfBudgets().length).toBe(0);
@@ -71,9 +63,7 @@ describe('BudgetListService', () => {
       name: 'J',
       email: 'john.doe@example.com',
       phone: '123456789',
-      budgetServices: {
-        services: [{ title: 'Generic Service' }],
-      },
+      budgetServices: [{ title: 'Generic Service' }],
       total: 0,
     });
     expect(service.listOfBudgets().length).toBe(0);
@@ -86,9 +76,7 @@ describe('BudgetListService', () => {
       name: 'John Doe',
       email: '',
       phone: '123456789',
-      budgetServices: {
-        services: [{ title: 'Generic Service' }],
-      },
+      budgetServices: [{ title: 'Generic Service' }],
       total: 0,
     });
     expect(service.listOfBudgets().length).toBe(0);
@@ -101,9 +89,7 @@ describe('BudgetListService', () => {
       email: 123,
       name: 'John Doe',
       phone: '123456789',
-      budgetServices: {
-        services: [{ title: 'Generic Service' }],
-      },
+      budgetServices: [{ title: 'Generic Service' }],
       total: 0,
     });
     expect(service.listOfBudgets().length).toBe(0);
@@ -115,9 +101,7 @@ describe('BudgetListService', () => {
       name: 'John Doe',
       email: 'john.doe.example.com',
       phone: '123456789',
-      budgetServices: {
-        services: [{ title: 'Generic Service' }],
-      },
+      budgetServices: [{ title: 'Generic Service' }],
       total: 0,
     });
     expect(service.listOfBudgets().length).toBe(0);
@@ -129,9 +113,7 @@ describe('BudgetListService', () => {
       name: 'John Doe',
       email: 'john.doe@examplecom',
       phone: '123456789',
-      budgetServices: {
-        services: [{ title: 'Generic Service' }],
-      },
+      budgetServices: [{ title: 'Generic Service' }],
       total: 0,
     });
     expect(service.listOfBudgets().length).toBe(0);
@@ -144,9 +126,7 @@ describe('BudgetListService', () => {
       name: 'John Doe',
       email: 'john.doe@example.com',
       phone: '',
-      budgetServices: {
-        services: [{ title: 'Generic Service' }],
-      },
+      budgetServices: [{ title: 'Generic Service' }],
       total: 0,
     });
     expect(service.listOfBudgets().length).toBe(0);
@@ -159,9 +139,7 @@ describe('BudgetListService', () => {
       phone: 123,
       name: 'John Doe',
       email: 'john.doe@example.com',
-      budgetServices: {
-        services: [{ title: 'Generic Service' }],
-      },
+      budgetServices: [{ title: 'Generic Service' }],
       total: 0,
     });
     expect(service.listOfBudgets().length).toBe(0);
@@ -173,9 +151,7 @@ describe('BudgetListService', () => {
       name: 'John Doe',
       email: 'john.doe@example.com',
       phone: 'abc',
-      budgetServices: {
-        services: [{ title: 'Generic Service' }],
-      },
+      budgetServices: [{ title: 'Generic Service' }],
       total: 0,
     });
     expect(service.listOfBudgets().length).toBe(0);
@@ -187,9 +163,7 @@ describe('BudgetListService', () => {
       name: 'John Doe',
       email: 'john.doe@example.com',
       phone: '12345',
-      budgetServices: {
-        services: [{ title: 'Generic Service' }],
-      },
+      budgetServices: [{ title: 'Generic Service' }],
       total: 0,
     });
     expect(service.listOfBudgets().length).toBe(0);
@@ -201,9 +175,7 @@ describe('BudgetListService', () => {
       name: 'John Doe',
       email: 'john.doe@example.com',
       phone: '12345678901',
-      budgetServices: {
-        services: [{ title: 'Generic Service' }],
-      },
+      budgetServices: [{ title: 'Generic Service' }],
       total: 0,
     });
     expect(service.listOfBudgets().length).toBe(0);
@@ -216,9 +188,7 @@ describe('BudgetListService', () => {
       name: 'John Doe',
       email: 'john.doe@example.com',
       phone: '123456789',
-      budgetServices: {
-        services: [],
-      },
+      budgetServices: [],
       total: 0,
     });
     expect(service.listOfBudgets().length).toBe(0);
