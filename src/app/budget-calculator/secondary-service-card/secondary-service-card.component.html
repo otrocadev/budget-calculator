@@ -1,11 +1,14 @@
 <span>
   <button class="info-button" (click)="openDialog()">i</button>
-  <p>Number of {{ secondaryService.title }}</p>
+  <p>
+    Number of {{ secondaryService().type === "addOn" ? "additional " : ""
+    }}{{ secondaryService().title }}
+  </p>
   <div class="secondary-service-amount">
     <button class="amount-button" (click)="reduceAmount()">-</button>
     <input
       type="number"
-      [(ngModel)]="amountCounter"
+      [(ngModel)]="secondaryService().amount"
       (ngModelChange)="emitAmountChange()"
     />
     <button class="amount-button" (click)="increaseAmount()">+</button>

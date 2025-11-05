@@ -1,4 +1,4 @@
-<article class="service-card" [ngClass]="{ selected: service.selected }">
+<article class="card service-card" [ngClass]="{ selected: service.selected }">
   <section>
     <h3 class="service-title">{{ service.title }}</h3>
     <span>{{ service.description }}</span>
@@ -10,15 +10,15 @@
       type="checkbox"
       (change)="onCheckboxChange()"
     />
-    <label>Afegir</label>
+    <label>Add</label>
   </section>
   @if (service.secondaryServices && service.selected) {
   <section class="secondary-services">
     @for (secondaryService of service.secondaryServices; track
     secondaryService.title) {
     <app-secondary-service-card
+      [parentService]="service.title"
       [secondaryService]="secondaryService"
-      (amountChangeEvent)="secondaryServicesChange($event)"
     ></app-secondary-service-card>
     }
   </section>

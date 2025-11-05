@@ -1,8 +1,9 @@
-import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
-import type { SecondaryService } from '../../../data/servicesData';
+import { Component, input, inject, signal, Signal } from '@angular/core';
+import type { SecondaryService } from '../../../config/servicesConfig';
 import { FormsModule } from '@angular/forms';
-import { ModalInfoComponent } from '../../modal-info/modal-info.component';
+import { ModalInfoComponent } from '../modal-info/modal-info.component';
 import { Dialog } from '@angular/cdk/dialog';
+import { BudgetStateService } from '../../../services/budgetStatusService';
 
 @Component({
   selector: 'app-secondary-service-card',
@@ -11,35 +12,30 @@ import { Dialog } from '@angular/cdk/dialog';
   styleUrl: './secondary-service-card.component.css',
 })
 export class SecondaryServiceCardComponent {
-  @Input() secondaryService!: SecondaryService;
-  @Output() amountChangeEvent = new EventEmitter<{
-    service: string;
-    amount: number;
-  }>();
-
-  amountCounter: number = 0;
-
-  ngOnInit() {
-    this.amountCounter = this.secondaryService.amount;
-  }
+  parentService = input.required<string>();
+  secondaryService = input.required<SecondaryService>();
+  budgetStateService = inject(BudgetStateService);
 
   emitAmountChange() {
-    this.amountChangeEvent.emit({
-      service: this.secondaryService.title,
-      amount: this.amountCounter,
+    this.budgetStateService.manageSecondaryService({
+      parentService: this.parentService(),
+      title: this.secondaryService().title,
+      amount: this.secondaryService().amount,
+      type: this.secondaryService().type,
+      price: this.secondaryService().price,
     });
   }
 
   reduceAmount() {
-    if (this.amountCounter > 0) {
-      this.amountCounter--;
+    if (this.secondaryService().amount > 0) {
+      this.secondaryService().amount = this.secondaryService().amount - 1;
       this.emitAmountChange();
     }
   }
 
   increaseAmount() {
-    if (this.amountCounter < 20) {
-      this.amountCounter++;
+    if (this.secondaryService().amount < 20) {
+      this.secondaryService().amount = this.secondaryService().amount + 1;
       this.emitAmountChange();
     }
   }
@@ -48,9 +44,9 @@ export class SecondaryServiceCardComponent {
   openDialog() {
     this.dialog.open(ModalInfoComponent, {
       data: {
-        title: this.secondaryService.title,
-        description: this.secondaryService.description,
-        price: this.secondaryService.price,
+        title: this.secondaryService().title,
+        description: this.secondaryService().description,
+        price: this.secondaryService().price,
       },
     });
   }

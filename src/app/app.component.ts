@@ -1,10 +1,17 @@
 import { Component } from '@angular/core';
 import { BudgetCalculatorComponent } from './budget-calculator/budget-calculator.component';
 import { HeaderComponent } from './header/header.component';
+import { BudgetApplicationFormComponent } from './budget-application-form/budget-application-form.component';
+import { BudgetListComponent } from './budget-list/budget-list.component';
 
 @Component({
   selector: 'app-root',
-  imports: [BudgetCalculatorComponent, HeaderComponent],
+  imports: [
+    BudgetCalculatorComponent,
+    HeaderComponent,
+    BudgetApplicationFormComponent,
+    BudgetListComponent,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
