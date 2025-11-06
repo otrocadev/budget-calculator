@@ -15,7 +15,7 @@ The objective in this repo is to manage different states and manage the interact
 - [X] Filters to order for the data of creation, amount and name must be available for the user
 - [X] A search functionality to filter the resuls.
 ## Level 3
-- [ ] Manage the parameters from the url of the site to be able to pass a created budget to someone else
+- [X] Manage the parameters from the url of the site to be able to pass a created budget to someone else
 
 ## 🖥️ Preview of the project
 
