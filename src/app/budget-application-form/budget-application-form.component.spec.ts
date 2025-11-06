@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BudgetApplicationFormComponent } from './budget-application-form.component';
 import { signal, WritableSignal } from '@angular/core';
 import { BudgetStateService } from '../../services/budgetStatusService';
-import type { Service } from '../../config/servicesConfig';
+import type { Service } from '../../types/budgetStatusTypes';
 
 describe('BudgetApplicationFormComponent', () => {
   let component: BudgetApplicationFormComponent;

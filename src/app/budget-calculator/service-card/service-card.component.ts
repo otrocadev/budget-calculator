@@ -1,7 +1,7 @@
 import { Component, Input, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgClass } from '@angular/common';
-import type { Service } from '../../../config/servicesConfig';
+import type { Service } from '../../../types/budgetStatusTypes';
 import { SecondaryServiceCardComponent } from '../secondary-service-card/secondary-service-card.component';
 import { BudgetStateService } from '../../../services/budgetStatusService';
 

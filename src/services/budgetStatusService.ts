@@ -52,18 +52,27 @@ export class BudgetStateService {
 
   // Secondary services management
   public manageSecondaryService(service: SecondaryServiceState) {
-    this._services.update((services) => {
+    this._services.update((services) =>
       services.map((parentService) => {
         if (parentService.title === service.parentService) {
-          parentService.secondaryServices?.map((secondaryServiceToUpdate) => {
-            if (secondaryServiceToUpdate.title === service.title) {
-              secondaryServiceToUpdate.amount = service.amount;
-            }
-          });
+          return {
+            ...parentService,
+            secondaryServices: parentService.secondaryServices?.map(
+              (secondaryServiceToUpdate) => {
+                if (secondaryServiceToUpdate.title === service.title) {
+                  return {
+                    ...secondaryServiceToUpdate,
+                    amount: service.amount,
+                  };
+                }
+                return secondaryServiceToUpdate;
+              }
+            ),
+          };
         }
-      });
-      return services;
-    });
+        return parentService;
+      })
+    );
     this.updateTotal();
   }
 }

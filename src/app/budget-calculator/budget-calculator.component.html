@@ -1,5 +1,5 @@
 <section id="services-calculator">
-  @for(service of servicesConfig; track service.title) {
+  @for(service of budgetStateService.services(); track service.title) {
   <app-service-card [service]="service"></app-service-card>
   }
   <span id="total-price"

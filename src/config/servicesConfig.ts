@@ -1,10 +1,4 @@
-export type Service = {
-  title: string;
-  description: string;
-  price: number;
-  selected: boolean;
-  secondaryServices?: SecondaryService[];
-};
+import type { Service } from '../types/budgetStatusTypes';
 
 export type SecondaryService = {
   title: string;
