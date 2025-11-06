@@ -1,8 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 import { ServiceCardComponent } from './service-card/service-card.component';
 import { servicesConfig } from '../../config/servicesConfig';
 import { BudgetStateService } from '../../services/budgetStatusService';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Service } from '../../types/budgetStatusTypes';
 
 @Component({
   selector: 'app-budget-calculator',
@@ -25,9 +26,14 @@ export class BudgetCalculatorComponent {
     this.route.queryParams.subscribe((params) => {
       this.applyParamsToServices(params);
     });
+
+    effect(() => {
+      const services = this.budgetStateService.services();
+      this.updateUrlFromServices(services);
+    });
   }
 
-  private applyParamsToServices(params: any) {
+  private applyParamsToServices(params: Params) {
     const services = this.budgetStateService.services();
 
     services.forEach((service) => {
@@ -64,5 +70,34 @@ export class BudgetCalculatorComponent {
         }
       });
     }, 0);
+  }
+
+  private updateUrlFromServices(services: Service[]) {
+    const queryParams: Params = {};
+
+    services.forEach((service) => {
+      if (service.selected) {
+        queryParams[service.title.toLowerCase()] = 'true';
+
+        // adding secondary services in case that the service have them
+        if (service.secondaryServices) {
+          service.secondaryServices.forEach((secondary) => {
+            if (secondary.amount > 0) {
+              const paramKey = `${service.title.toLowerCase()}_${
+                secondary.title
+              }`;
+              queryParams[paramKey] = secondary.amount;
+            }
+          });
+        }
+      }
+    });
+
+    // replace the url with the new params created
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams,
+      replaceUrl: true,
+    });
   }
 }

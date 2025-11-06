@@ -1,10 +1,4 @@
-export type ServiceConfig = {
-  title: string;
-  description: string;
-  price: number;
-  selected: boolean;
-  secondaryServices?: SecondaryService[];
-};
+import type { Service } from '../types/budgetStatusTypes';
 
 export type SecondaryService = {
   title: string;
@@ -14,7 +8,7 @@ export type SecondaryService = {
   amount: number;
 };
 
-export const servicesConfig: ServiceConfig[] = [
+export const servicesConfig: Service[] = [
   {
     title: 'SEO',
     description: 'SEO optimization for your website',
