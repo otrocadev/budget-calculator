@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ServiceCardComponent } from './service-card.component';
-import type { Service } from '../../../config/servicesConfig';
+import type { Service } from '../../../types/budgetStatusTypes';
 
 describe('ServiceCardComponent', () => {
   let component: ServiceCardComponent;

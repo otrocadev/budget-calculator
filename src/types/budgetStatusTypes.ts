@@ -2,6 +2,7 @@ import type { SecondaryService } from '../config/servicesConfig';
 
 export type Service = {
   title: string;
+  description?: string;
   price: number;
   selected: boolean;
   secondaryServices?: SecondaryService[];
