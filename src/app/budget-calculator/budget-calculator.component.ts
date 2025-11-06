@@ -1,4 +1,4 @@
-import { Component, effect, inject } from '@angular/core';
+import { Component, effect, inject, untracked } from '@angular/core';
 import { ServiceCardComponent } from './service-card/service-card.component';
 import { servicesConfig } from '../../config/servicesConfig';
 import { BudgetStateService } from '../../services/budgetStatusService';
@@ -21,15 +21,23 @@ export class BudgetCalculatorComponent {
   // Routes to manage params from url
   private router = inject(Router);
   private route = inject(ActivatedRoute);
+  private isApplyingParams = false;
 
   constructor() {
     this.route.queryParams.subscribe((params) => {
+      this.isApplyingParams = true;
       this.applyParamsToServices(params);
+      setTimeout(() => (this.isApplyingParams = false), 100);
     });
 
     effect(() => {
       const services = this.budgetStateService.services();
-      this.updateUrlFromServices(services);
+
+      untracked(() => {
+        if (!this.isApplyingParams) {
+          this.updateUrlFromServices(services);
+        }
+      });
     });
   }
 
