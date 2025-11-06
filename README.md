@@ -64,3 +64,4 @@ For more information on using the Angular CLI, including detailed command refere
 ## 🏗️ Things to improve 
 - [ ] Better mobile compatibility.
 - [ ] Better UI, such as the listed budget cards, addapting better depending on the lenght of the information
+- [ ] Feature: Being able to delete the current budgets from the UI
